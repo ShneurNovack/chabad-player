@@ -208,7 +208,7 @@ Each catalog id is a Chabad.org article id. To play it:
 
    ```
    GET https://www.chabad.org/multimedia/mediaplayer/flash_media_player_content.xml.asp?what=json&aid={aid}
-   User-Agent: ChabadDisplay/1.0 (+https://github.com/ShneurNovack)     <- an honest UA; a spoofed browser UA gets Cloudflare-challenged (403)
+   User-Agent: ChabadDisplay/1.0     <- an honest UA; a spoofed browser UA gets Cloudflare-challenged (403)
    ```
 
    The response is JavaScript, not JSON: `Co.MediaInfo['item4192713'] = { ... };`. Strip the wrapper with

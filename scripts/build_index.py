@@ -16,7 +16,7 @@ Writes: videos.json, topics.json, dates.json, build.json  (calendar.json is hand
 import argparse, concurrent.futures as cf, html, json, os, re, sys, time, urllib.request, urllib.error
 
 BASE = "https://www.chabad.org"
-UA = "ChabadPlayerIndex/1.0 (+https://github.com/ShneurNovack/chabad-player)"
+UA = "ChabadPlayerIndex/1.0"
 LT = "/therebbe/livingtorah/default_cdo"
 
 def get(url, tries=4):

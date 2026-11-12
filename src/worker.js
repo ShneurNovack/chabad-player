@@ -62,7 +62,7 @@ async function getMedia(url) {
 
   const src = SOURCE + (aid ? `&aid=${aid}` : `&iid=${iid}`);
   const res = await fetch(src, {
-    headers: { "user-agent": "Mozilla/5.0 (chabad-player POC)", accept: "*/*" },
+    headers: { "user-agent": "ChabadPlayer/1.0", accept: "*/*" },
     cf: { cacheTtl: 300, cacheEverything: true },
   });
   if (!res.ok) return json({ error: `Upstream returned ${res.status}` }, 502);
