@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chabad Player</title>
+<link rel="stylesheet" href="/player.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  #player, #player .cp { width: 100%; height: 100%; aspect-ratio: auto !important; }
+  .fail { color: #fff; font: 15px system-ui, sans-serif; padding: 20px; }
+  .fail a { color: #9db4ff; }
+</style>
+</head>
+<body>
+<div id="player"></div>
+<script src="/player.js"></script>
+<script>
+  (async () => {
+    const p = new URLSearchParams(location.search);
+    const aid = ChabadPlayer.parseId(p.get("aid"));
+    const el = document.getElementById("player");
+    if (!aid) { el.innerHTML = '<div class="fail">Missing ?aid=</div>'; return; }
+    try {
+      const media = await ChabadPlayer.loadMedia(aid);
+      if (!media.allowEmbed) throw new Error("Embedding is off for this item.");
+      document.title = media.title;
+      await ChabadPlayer.mountPlayer(el, media, { autoplay: p.get("autoplay") === "1", start: Number(p.get("start")) || 0 });
+    } catch (e) {
+      el.innerHTML = `<div class="fail">${e.message} <a href="https://www.chabad.org/${aid}" target="_blank">Watch on Chabad.org</a></div>`;
+    }
+  })();
+</script>
+</body>
+</html>

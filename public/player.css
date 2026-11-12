@@ -1,0 +1,33 @@
+.cp { position: relative; background: #000; aspect-ratio: 16 / 9; overflow: hidden; outline: none; font-family: "Inter", system-ui, sans-serif; }
+.cp-video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+.cp-audio { aspect-ratio: auto; min-height: 64px; }
+.cp-audio .cp-video { height: 0; }
+.cp-audio .cp-big { display: none; }
+.cp-audio .cp-bar { position: static; opacity: 1; }
+
+.cp-big { position: absolute; inset: 0; margin: auto; width: 88px; height: 88px; border: 0; border-radius: 0; background: #1d3b8b; color: #fff; cursor: pointer; display: grid; place-items: center; }
+.cp-big svg { width: 36px; height: 36px; fill: currentColor; }
+.cp-big:hover { background: #2a4fb3; }
+.cp-playing .cp-big { display: none; }
+
+.cp-bar { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: rgba(10, 10, 12, 0.82); color: #fff; font-size: 13px; transition: opacity .2s; }
+.cp-playing .cp-bar { opacity: 0; }
+.cp-playing:hover .cp-bar, .cp-playing:focus-within .cp-bar { opacity: 1; }
+
+.cp-btn { background: none; border: 0; color: #fff; width: 28px; height: 28px; padding: 2px; cursor: pointer; flex: none; }
+.cp-btn svg { width: 100%; height: 100%; fill: currentColor; }
+.cp-time { white-space: nowrap; font-variant-numeric: tabular-nums; opacity: .9; }
+
+.cp-seek { --p: 0%; flex: 1; min-width: 60px; height: 4px; appearance: none; -webkit-appearance: none; background: linear-gradient(to right, #fff var(--p), rgba(255,255,255,.28) var(--p)); border-radius: 0; cursor: pointer; }
+.cp-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; background: #fff; border: 0; border-radius: 0; }
+.cp-seek::-moz-range-thumb { width: 12px; height: 12px; background: #fff; border: 0; border-radius: 0; }
+
+.cp-sel { background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 0; padding: 5px 8px; font: inherit; cursor: pointer; }
+.cp-sel option { color: #111; }
+
+.cp-msg { position: absolute; left: 0; right: 0; top: 0; padding: 14px 16px; background: #8b1d1d; color: #fff; font-size: 14px; }
+
+@media (max-width: 560px) {
+  .cp-speed, .cp-time { display: none; }
+  .cp-bar { gap: 10px; padding: 10px 12px; }
+}
