@@ -109,10 +109,12 @@ Coverage: every parsha has 29-118 videos combined, except Vezos Habracha (0; it'
 "9-19": [ { "aid": 3747190, "hYear": 5716 }, { "aid": 4582974, "hYear": 5718 }, ... 118 entries ]
 ```
 
-Key is `"hMonth-hDay"`. The value is every video recorded on that Hebrew date, sorted by year. 286 of the year's dates have at least one video (median 4; big days like 19 Kislev, 10 Shevat and 12 Tammuz have 100+). For Adar in a leap year, check both `12-D` and `13-D` for Adar II dates, and `12-D` for Adar I (Chabad.org files Adar I footage under 12).
+Key is `"hMonth-hDay"`. The value is every video recorded on that Hebrew date, sorted by year. 286 of the year's dates have at least one video (median 4). The biggest days are 10 Shevat (126), 19 Kislev (118), 12 Tammuz (92), 14 Adar (80), 20 Av (76) and 11 Nissan (66). For Adar in a leap year, check both `12-D` and `13-D` for Adar II dates, and `12-D` for Adar I (Chabad.org files Adar I footage under 12).
 
 
 ## 3. Hebrew calendar logic (use `@hebcal/core`)
+
+The code below was run against the Python reference (`scripts/preview.py`) on 8 dates, including a doubled parsha and both Adars of a leap year, and gives the same results.
 
 ```js
 import { HDate, months, getSedra } from '@hebcal/core';   // npm i @hebcal/core  (tested with 6.16)
@@ -266,12 +268,14 @@ How the sources fit together, for whoever maintains this:
 
 ## 8. Test vectors
 
-Use these to check the JS port (diaspora schedule):
+Use these to check the JS port (diaspora schedule). The parsha indexes and active special days below were produced by both the section 3 code and `scripts/preview.py`.
 
-| Gregorian date | Hebrew date | Parsha index (Hebcal num−1) | Should include |
-|---|---|---|---|
-| 2026-11-11 | 1 Kislev 5787 | 5 (Toldot) | On this day: Kinus Hashluchim 1987 clips. Special: Rosh Chodesh Kislev (the 1977 heart attack and recovery videos, e.g. aid 4192713). Parsha tier: Toldos `aired` only (no tagged videos). |
-| 2026-12-08 | 28 Kislev 5787 | 9 (Miketz) | Special: Chanukah (e.g. "Listen to the Lights" 3877926, "The Chanukah Battle Continues" 603066). |
-| 2027-01-17 | 9 Shevat 5787 | 15 (Beshalach) | On this day: 9 Shevat clips. Special: Yud Shevat "in 1 day". |
-| 2026-10-03 | 22 Tishrei 5787 | none (`chag: true`) | Special: Shemini Atzeres & Simchas Torah. No parsha tier. |
-| 2027-03-23 | 14 Adar II 5787 (leap year) | — | Special: Purim (Adar II in a leap year), not Purim Katan. |
+| Gregorian date | Hebrew date | Parsha index (Hebcal num−1) | Active special days | Should include |
+|---|---|---|---|---|
+| 2026-11-11 | 1 Kislev 5787 | 5 (Toldot) | rosh-chodesh-kislev | On this day: Kinus Hashluchim 1987 clips. Rosh Chodesh Kislev: the 1977 heart attack and recovery videos (e.g. aid 4192713). Parsha tier: Toldos `aired` only (no tagged videos). |
+| 2026-12-08 | 28 Kislev 5787 | 9 (Miketz) | chanukah | Chanukah: e.g. "Listen to the Lights" 3877926, "The Chanukah Battle Continues" 603066. |
+| 2027-01-17 | 9 Shevat 5787 | 15 (Beshalach) | yud-shevat (in 1 day) | On this day: 9 Shevat clips, then Yud Shevat. |
+| 2026-10-03 | 22 Tishrei 5787 | none (`chag: true`) | simchas-torah | Shemini Atzeres & Simchas Torah. No parsha tier. |
+| 2027-02-21 | 14 Adar I 5787 (leap year) | 20 (Ki Tisa) | purim-katan | Purim Katan, not Purim. |
+| 2027-03-23 | 14 Adar II 5787 (leap year) | 24 (Tzav) | purim, adar | Purim (Adar II in a leap year), not Purim Katan. |
+| 2026-09-05 | 23 Elul 5786 | 50, 51 (Nitzavim-Vayeilech) | elul, rosh-hashanah (in 7 days) | A doubled parsha, and a window that crosses into the next Hebrew year. |
