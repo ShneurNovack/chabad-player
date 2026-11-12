@@ -30,3 +30,10 @@ If `/api/media` is unreachable, the page falls back to loading Chabad's metadata
 
 GitHub repo connected to Cloudflare Workers Builds; pushes to `main` deploy automatically (`npx wrangler deploy`).
 Local: `npm i && npx wrangler dev`.
+
+## Rebbe video index (for the Chabad Display timely-video widget)
+
+`public/data/` holds a prebuilt index of every Rebbe video on Chabad.org's TheRebbe.org Video section (Living Torah plus the other hub categories): 3,480 unique playable videos, mapped to Hebrew dates ("on this day"), all 54 parshiyos, and ~37 holidays and Chabad special days. Served at `https://chabad-player.shneur.workers.dev/data/*.json` with CORS.
+
+- **`IMPLEMENTATION.md`**: full spec for building the widget (modes, data schemas, Hebcal logic, playlist tiers, playback, test vectors).
+- **`scripts/`**: `build_index.py` → `build_hub.py` → `build_calendar.py` rebuild the index (~15 min, needs `pip install pyluach`); `preview.py [date] [--mode ...]` prints the playlist the widget should produce for any date.
